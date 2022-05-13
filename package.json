@@ -1,0 +1,33 @@
+{
+  "name": "cdk-monorepo-template",
+  "version": "1.0.0",
+  "private": true,
+  "description": "a template for a monorepo structure that can be used for cdk projects",
+  "license": "ISC",
+  "author": "Georg Dörgeloh",
+  "scripts": {
+    "list": "lerna list --all --long",
+    "bootstrap": "lerna bootstrap",
+    "install-deps": "lerna bootstrap --ignore-scripts",
+    "build": "lerna run build",
+    "watch": "lerna run --parallel watch",
+    "prettier:write": "preittier --write .",
+    "prettier:check": "prettier --check .",
+    "lint": "eslint .",
+    "test": "lerna run test",
+    "premerge-coverage": "mkdir -p .nyc_output && lerna exec -- cp coverage/coverage-final.json \\$LERNA_ROOT_PATH/.nyc_output/coverage-\\$LERNA_PACKAGE_NAME.json \\|\\| true",
+    "merge-coverage": "nyc merge .nyc_output coverage/coverage-final.json",
+    "update-packagelock": "lerna clean --yes && lerna exec -- rm -f package-lock.json && lerna bootstrap --ignore-scripts -- --package-lock-only --no-audit",
+    "update-packages": "lerna exec --concurrency 1 -- ncu -i -x /@types/node$/"
+  },
+  "devDependencies": {
+    "@typescript-eslint/eslint-plugin": "^5.23.0",
+    "@typescript-eslint/parser": "^5.23.0",
+    "eslint": "^8.15.0",
+    "eslint-config-prettier": "^8.5.0",
+    "lerna": "^4.0.0",
+    "npm-check-updates": "^12.5.11",
+    "nyc": "^15.1.0",
+    "prettier": "^2.6.2"
+  }
+}

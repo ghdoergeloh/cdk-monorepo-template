@@ -1,7 +1,3 @@
-# CDK asset staging directory
-.cdk.staging
-**/cdk.out
-
 # IDE
 .idea
 **/*.iml
@@ -12,6 +8,7 @@
 # Reports and Logs
 **/junit.xml
 **/coverage
+**/.nyc_output
 
 # Dependencies
 **/node_modules

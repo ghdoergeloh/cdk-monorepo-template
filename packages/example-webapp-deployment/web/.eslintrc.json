@@ -1,0 +1,14 @@
+{
+  "settings": {
+    "react": {
+      "version": "detect"
+    }
+  },
+  "plugins": ["react-hooks"],
+  "extends": ["../../../.eslintrc.json", "plugin:react/recommended"],
+  "rules": {
+    "react-hooks/rules-of-hooks": "error",
+    "react-hooks/exhaustive-deps": "warn"
+  },
+  "ignorePatterns": ["build"]
+}

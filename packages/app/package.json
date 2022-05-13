@@ -1,0 +1,29 @@
+{
+  "name": "app",
+  "version": "0.1.0",
+  "main": "lib/app.js",
+  "types": "lib/app.d.ts",
+  "bin": {
+    "app": "bin/app.js"
+  },
+  "scripts": {
+    "test": "jest",
+    "cdk": "cdk"
+  },
+  "devDependencies": {
+    "@types/jest": "^27.5.1",
+    "@types/node": "^14.18.18",
+    "aws-cdk": "2.24.1",
+    "jest": "^28.1.0",
+    "ts-jest": "^28.0.2",
+    "ts-node": "^10.7.0",
+    "typescript": "~4.6.4"
+  },
+  "dependencies": {
+    "aws-cdk-lib": "2.24.1",
+    "constructs": "^10.1.7",
+    "example-lambda": "^0.1.0",
+    "example-webapp-deployment": "^0.1.0",
+    "source-map-support": "^0.5.21"
+  }
+}

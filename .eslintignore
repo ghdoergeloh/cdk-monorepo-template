@@ -1,0 +1,4 @@
+**/cdk.out/**
+**/lib/*.js
+**/src/*.js
+**/lambda/*.js

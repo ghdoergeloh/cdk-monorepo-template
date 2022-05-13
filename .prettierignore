@@ -1,0 +1,23 @@
+# CDK asset staging directory
+.cdk.staging
+cdk.out
+
+# IDE
+.idea
+**/*.iml
+.vscode
+
+**/.DS_Store
+
+# Reports and Logs
+**/junit.xml
+**/coverage
+
+# Dependencies
+**/node_modules
+.npm
+
+packages/**/*.js
+packages/**/*.d.ts
+package-lock.json
+packages/**/build/**

@@ -1,0 +1,8 @@
+'use strict';
+Object.defineProperty(exports, '__esModule', { value: true });
+// jest-dom adds custom jest matchers for asserting on DOM nodes.
+// allows you to do things like:
+// expect(element).toHaveTextContent(/react/i)
+// learn more: https://github.com/testing-library/jest-dom
+require('@testing-library/jest-dom');
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoic2V0dXBUZXN0cy5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbInNldHVwVGVzdHMudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6Ijs7QUFBQSxpRUFBaUU7QUFDakUsZ0NBQWdDO0FBQ2hDLDhDQUE4QztBQUM5QywwREFBMEQ7QUFDMUQscUNBQW1DIiwic291cmNlc0NvbnRlbnQiOlsiLy8gamVzdC1kb20gYWRkcyBjdXN0b20gamVzdCBtYXRjaGVycyBmb3IgYXNzZXJ0aW5nIG9uIERPTSBub2Rlcy5cbi8vIGFsbG93cyB5b3UgdG8gZG8gdGhpbmdzIGxpa2U6XG4vLyBleHBlY3QoZWxlbWVudCkudG9IYXZlVGV4dENvbnRlbnQoL3JlYWN0L2kpXG4vLyBsZWFybiBtb3JlOiBodHRwczovL2dpdGh1Yi5jb20vdGVzdGluZy1saWJyYXJ5L2plc3QtZG9tXG5pbXBvcnQgJ0B0ZXN0aW5nLWxpYnJhcnkvamVzdC1kb20nO1xuIl19
