@@ -4,8 +4,8 @@
 
 This is a Template for a cdk based project. The idea is based on the descriptions in this
 [best practices guide from AWS](https://docs.aws.amazon.com/cdk/v2/guide/best-practices.html).
-As this guide says a cdk app is seperated into packages which each consists of cdk construct libraries
-or which again are build out of other construct libraries.
+As this guide says a cdk app is seperated into packages which each consists of one cdk app
+or cdk construct libraries which again are build out of other construct libraries.
 
 ![structure](https://docs.aws.amazon.com/cdk/v2/guide/images/code-organization.jpg)
 
@@ -13,9 +13,9 @@ The purpose of this template is to give you the possibility to organize your app
 As the guide says you should start with an app build out of constructs and extract them as needed
 and fitting to the code lifecycle and team ownership.
 
-To make the extraction as easy as possible and to decouple the packages in the beginning this template
-is created as a multi package repository. Each package either exports a cdk construct as a package or
-it is a cdk app that can be published.
+To make the extraction as easy as possible and to decouple the packages from the beginning,
+this template is created as a multi package repository. Each package either exports a cdk
+construct as a package or it is a cdk app that can be published.
 
 Each **repo** should have one ci package which is a cdk app that deploys a CodeCommit repository and
 a CodePipeline.
@@ -143,7 +143,7 @@ from a repository or the name of a package in this repository that is known to l
 (see [overview](#overview)).
 
 ```shell
-lerna add A --scope=B
+lerna add <package-name-A> --scope=<package-name-B>
 ```
 
 ### add a new package
@@ -163,7 +163,8 @@ cdk init <lib|app> --language typescript
 
 #### optional:
 
-- Now you can use the predefined `tsconfig.json` by simply extending it. Replace the content with:
+- Now you can update the dependencies of new packages by using the [update scripts](#update).
+- You can use the predefined `tsconfig.json` by simply extending it. Replace the content with:
 
 ```json
 {
