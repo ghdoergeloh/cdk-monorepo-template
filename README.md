@@ -31,6 +31,13 @@ Furthermore:
 This project uses lerna to manage this multi-package-/mono-repository. If you need more information,
 have a look at [the Github documentation](https://github.com/lerna/lerna).
 
+It is recommended to install lerna. You can also use it from the dependency installation by referencing
+the right path, e.g.:
+
+```shell
+node_modules/.bin/lerna bootstrap
+```
+
 ### install
 
 To start working with this project, you can install all dependencies:
@@ -128,3 +135,62 @@ npm run update-packagelock
 ```
 
 Afterwards you can install the dependencies again as described above.
+
+### add a new dependency
+
+To add package A as a new dependency of package B, you can use lerna. `A` can be a public package
+from a repository or the name of a package in this repository that is known to lerna
+(see [overview](#overview)).
+
+```shell
+lerna add A --scope=B
+```
+
+### add a new package
+
+To add a new package you can follow these steps:
+
+- Create a new folder under packages
+- Init CDK in this new folder
+  - Use `app` if you want to create a deployable app that uses libs.
+  - Use `lib` if you want to create a construct library that can be used in other libs or apps.
+
+```shell
+mkdir packages/<package-name>
+cd packages/<package-name>
+cdk init <lib|app> --language typescript
+```
+
+#### optional:
+
+- Now you can use the predefined `tsconfig.json` by simply extending it. Replace the content with:
+
+```json
+{
+  "extends": "../../tsconfig.base.json",
+  "exclude": ["node_modules", "cdk.out"]
+}
+```
+
+- You can also replace the `jest.config.js` with this improved version, that won't make trouble with
+  compiled js files and adds the coverage and junit reporter. For the junit reporter you also need to install.
+  `jest-junit`.
+
+```js
+const { defaults } = require('jest-config');
+
+/** @type {import('ts-jest/dist/types').InitialOptionsTsJest} */
+module.exports = {
+  preset: 'ts-jest',
+  testEnvironment: 'node',
+  roots: ['<rootDir>/test'], // or other folders if you want to place the test next to the tested unit
+  testMatch: ['**/?(*.)+(spec|test).+(ts|tsx)'],
+  modulePathIgnorePatterns: ['.*__mocks__.*\\.(js|jsx)$'],
+  moduleFileExtensions: ['ts', 'tsx', ...defaults.moduleFileExtensions],
+  clearMocks: true,
+  restoreMocks: true,
+  collectCoverage: true,
+  reporters: ['default', 'jest-junit'],
+  // setupFiles: ['<rootDir>/jest.env.js'], // if you want to define env vars for the test
+};
+```
