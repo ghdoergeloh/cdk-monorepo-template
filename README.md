@@ -7,7 +7,7 @@ This is a Template for a cdk based project. The idea is based on the description
 As this guide says a cdk app is seperated into packages which each consists of one cdk app
 or cdk construct libraries which again are build out of other construct libraries.
 
-![structure](https://docs.aws.amazon.com/cdk/v2/guide/images/code-organization.jpg)
+![Image from AWS best practices guide](https://docs.aws.amazon.com/cdk/v2/guide/images/code-organization.jpg)
 
 The purpose of this template is to give you the possibility to organize your apps and libraries.
 As the guide says you should start with an app build out of constructs and extract them as needed
