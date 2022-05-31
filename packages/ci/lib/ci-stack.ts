@@ -60,7 +60,7 @@ export class CiStack extends Stack {
     });
 
     // DEV STAGE
-    if(props.accounts.dev) {
+    if (props.accounts.dev) {
       pipeline.addStage(
         new ExampleStage(this, 'Dev', {
           env: {
@@ -72,7 +72,7 @@ export class CiStack extends Stack {
     }
 
     // INT STAGE
-    if(props.accounts.int) {
+    if (props.accounts.int) {
       pipeline.addStage(
         new ExampleStage(this, 'Int', {
           env: {
@@ -86,7 +86,7 @@ export class CiStack extends Stack {
     }
 
     // PROD STAGE
-    if(props.accounts.prod) {
+    if (props.accounts.prod) {
       pipeline.addStage(
         new ExampleStage(this, 'Prod', {
           env: {

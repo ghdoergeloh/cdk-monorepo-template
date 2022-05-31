@@ -10,6 +10,9 @@
 **/coverage
 **/.nyc_output
 
+# Caches
+.scannerwork
+
 # Dependencies
 **/node_modules
 .npm

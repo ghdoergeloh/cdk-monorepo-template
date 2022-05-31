@@ -11,7 +11,7 @@
     "install-deps": "lerna bootstrap --ignore-scripts",
     "build": "lerna run build",
     "watch": "lerna run --parallel watch",
-    "prettier:write": "preittier --write .",
+    "prettier:write": "prettier --write .",
     "prettier:check": "prettier --check .",
     "lint": "eslint .",
     "test": "CI=true lerna run test",
