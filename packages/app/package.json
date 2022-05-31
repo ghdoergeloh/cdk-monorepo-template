@@ -7,6 +7,7 @@
     "app": "bin/app.js"
   },
   "scripts": {
+    "prepublish": "npm run build",
     "build": "tsc",
     "watch": "tsc -w",
     "test": "jest",
