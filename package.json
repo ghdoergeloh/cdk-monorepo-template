@@ -17,7 +17,7 @@
     "test": "CI=true lerna run test",
     "premerge-coverage": "mkdir -p .nyc_output && lerna exec -- cp coverage/coverage-final.json \\$LERNA_ROOT_PATH/.nyc_output/coverage-\\$LERNA_PACKAGE_NAME.json \\|\\| true",
     "merge-coverage": "nyc merge .nyc_output coverage/coverage-final.json",
-    "postmerge-coverage": "nyc report --reporter=clover --temp-dir coverage",
+    "postmerge-coverage": "nyc report --reporter=clover --reporter=lcov --temp-dir coverage",
     "update-packagelock": "lerna clean --yes && lerna exec -- rm -f package-lock.json && lerna bootstrap --ignore-scripts -- --package-lock-only --no-audit",
     "update-packages": "lerna exec --concurrency 1 -- ncu -i -x /@types/node$/"
   },
