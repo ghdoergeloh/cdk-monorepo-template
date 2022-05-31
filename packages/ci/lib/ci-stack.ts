@@ -10,9 +10,9 @@ export interface CiStackProps extends StackProps {
   branch: string;
   pipelinePackageName: string;
   accounts: {
-    dev: string;
-    int: string;
-    prod: string;
+    dev?: string;
+    int?: string;
+    prod?: string;
   };
 }
 
@@ -60,37 +60,43 @@ export class CiStack extends Stack {
     });
 
     // DEV STAGE
-    pipeline.addStage(
-      new ExampleStage(this, 'Dev', {
-        env: {
-          account: props.accounts.dev,
-        },
-      }),
-      {}
-    );
+    if(props.accounts.dev) {
+      pipeline.addStage(
+        new ExampleStage(this, 'Dev', {
+          env: {
+            account: props.accounts.dev,
+          },
+        }),
+        {}
+      );
+    }
 
     // INT STAGE
-    pipeline.addStage(
-      new ExampleStage(this, 'Int', {
-        env: {
-          account: props.accounts.int,
-        },
-      }),
-      {
-        pre: [new ManualApprovalStep('ApproveInt')],
-      }
-    );
+    if(props.accounts.int) {
+      pipeline.addStage(
+        new ExampleStage(this, 'Int', {
+          env: {
+            account: props.accounts.int,
+          },
+        }),
+        {
+          pre: [new ManualApprovalStep('ApproveInt')],
+        }
+      );
+    }
 
     // PROD STAGE
-    pipeline.addStage(
-      new ExampleStage(this, 'Prod', {
-        env: {
-          account: props.accounts.prod,
-        },
-      }),
-      {
-        pre: [new ManualApprovalStep('ApproveProd')],
-      }
-    );
+    if(props.accounts.prod) {
+      pipeline.addStage(
+        new ExampleStage(this, 'Prod', {
+          env: {
+            account: props.accounts.prod,
+          },
+        }),
+        {
+          pre: [new ManualApprovalStep('ApproveProd')],
+        }
+      );
+    }
   }
 }
