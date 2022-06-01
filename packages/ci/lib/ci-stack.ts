@@ -42,7 +42,7 @@ export class CiStack extends Stack {
         partialBuildSpec: BuildSpec.fromObject({
           phases: {
             build: {
-              finally: ['npm run merge-coverage'],
+              finally: ['cd $CODEBUILD_SRC_DIR', 'npm run merge-coverage'],
             },
           },
           reports: {
