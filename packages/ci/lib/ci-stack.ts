@@ -33,7 +33,7 @@ export class CiStack extends Stack {
           privileged: true,
           buildImage: LinuxBuildImage.STANDARD_5_0,
         },
-        installCommands: ['npm set unsafe-perm true', 'npm install -g aws-cdk@2'],
+        installCommands: ['npm set unsafe-perm true', 'npm install -g aws-cdk@2 esbuild'],
         commands: [
           'npm ci',
           'npm run bootstrap',
