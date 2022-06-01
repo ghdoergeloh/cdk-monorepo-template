@@ -12,5 +12,6 @@ module.exports = {
   restoreMocks: true,
   collectCoverage: true,
   reporters: ['default', 'jest-junit'],
+  testResultsProcessor: 'jest-sonar-reporter',
   // setupFiles: ['<rootDir>/jest.env.js'], // if you want to define env vars for the test
 };
