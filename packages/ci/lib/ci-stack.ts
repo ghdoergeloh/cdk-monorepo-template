@@ -2,7 +2,7 @@ import { Stack, StackProps } from 'aws-cdk-lib';
 import { Construct } from 'constructs';
 import { Repository } from 'aws-cdk-lib/aws-codecommit';
 import { CodeBuildStep, CodePipeline, CodePipelineSource, ManualApprovalStep } from 'aws-cdk-lib/pipelines';
-import { BuildSpec } from 'aws-cdk-lib/aws-codebuild';
+import { BuildSpec, LinuxBuildImage } from 'aws-cdk-lib/aws-codebuild';
 import { ExampleStage } from 'app';
 
 export interface CiStackProps extends StackProps {
@@ -29,6 +29,10 @@ export class CiStack extends Stack {
       crossAccountKeys: true,
       synth: new CodeBuildStep('SynthStep', {
         input: CodePipelineSource.codeCommit(repository, props.branch),
+        buildEnvironment: {
+          privileged: true,
+          buildImage: LinuxBuildImage.STANDARD_5_0,
+        },
         installCommands: ['npm set unsafe-perm true', 'npm install -g aws-cdk@2'],
         commands: [
           'npm ci',
