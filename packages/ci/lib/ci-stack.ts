@@ -29,7 +29,7 @@ export class CiStack extends Stack {
       crossAccountKeys: true,
       synth: new CodeBuildStep('SynthStep', {
         input: CodePipelineSource.codeCommit(repository, props.branch),
-        installCommands: ['npm install -g aws-cdk@2'],
+        installCommands: ['npm set unsafe-perm true', 'npm install -g aws-cdk@2'],
         commands: [
           'npm ci',
           'npm run bootstrap',
