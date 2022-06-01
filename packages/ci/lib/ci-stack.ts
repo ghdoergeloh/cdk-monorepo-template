@@ -43,6 +43,7 @@ export class CiStack extends Stack {
           'cd packages/' + props.pipelinePackageName,
           'cdk synth',
         ],
+        primaryOutputDirectory: 'packages/' + props.pipelinePackageName + '/cdk.out',
         partialBuildSpec: BuildSpec.fromObject({
           phases: {
             build: {
