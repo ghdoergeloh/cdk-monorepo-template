@@ -5,7 +5,6 @@
   "types": "lib/index.d.ts",
   "scripts": {
     "build": "tsc",
-    "prepublish": "npm run build",
     "test": "jest",
     "watch": "tsc -w"
   },

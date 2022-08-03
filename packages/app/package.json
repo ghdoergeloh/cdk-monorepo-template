@@ -9,7 +9,6 @@
   "scripts": {
     "build": "tsc",
     "cdk": "cdk",
-    "prepublish": "npm run build",
     "test": "jest",
     "watch": "tsc -w"
   },

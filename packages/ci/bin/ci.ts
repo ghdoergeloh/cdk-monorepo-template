@@ -67,8 +67,8 @@ new CiStack(app, 'CiStack', {
   sonarqubeSecret: sonarqubeSecret,
   sonarscannerRepo: sonarscannerRepo,
   npmRegistryDomain: resConfig.npmRegistryDomain,
+  configs: {},
   env: {
     region: 'eu-west-1',
   },
-  accounts: { dev: '', int: '', prod: '' },
 });
