@@ -1,4 +1,19 @@
 {
-  "packages": ["packages/**", "**/arg/**"],
-  "version": "0.0.0"
+  "$schema": "https://raw.githubusercontent.com/lerna/lerna/main/core/lerna/schemas/lerna-schema.json",
+  "version": "0.0.0",
+  "useWorkspaces": true,
+  "ignoreChanges": [
+    "**/test/**",
+    "**/*.md",
+    "**/jest.config.js"
+  ],
+  "noChangelog": true,
+  "command": {
+    "version": {
+      "allowBranch": [
+        "master"
+      ],
+      "message": "chore(release): publish %s"
+    }
+  }
 }

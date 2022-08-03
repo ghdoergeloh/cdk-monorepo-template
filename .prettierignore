@@ -12,12 +12,22 @@ cdk.out
 # Reports and Logs
 **/junit.xml
 **/coverage
+**/.nyc_output
+reports
+
+# Caches
+.scannerwork
 
 # Dependencies
 **/node_modules
 .npm
 
+# Builds
 packages/**/*.js
+!packages/**/jest.*.js
 packages/**/*.d.ts
-package-lock.json
 packages/**/build/**
+
+# Generated
+package-lock.json
+lerna.json

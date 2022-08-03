@@ -1,4 +1,11 @@
-**/cdk.out/**
-**/lib/*.js
-**/src/*.js
-**/lambda/*.js
+**/bin/**/*.js
+**/lib/**/*.js
+**/test/**/*.js
+**/src/**/*.js
+**/lambda/**/*.js
+/**/cdk.out/*
+/**/coverage/*
+/**/node_modules/*
+/**/.nyc_output/*
+/**/.idea/*
+/**/.scannerwork/*

@@ -44,14 +44,6 @@ To start working with this project, you can install all dependencies:
 
 ```shell
 npm ci
-npm run bootstrap
-```
-
-This will also run all prepublish scripts, which means, it will build the code, so packages can be used.
-If you just want to install the dependencies run:
-
-```shell
-npm run install-deps
 ```
 
 ### overview
@@ -169,18 +161,20 @@ cdk init <lib|app> --language typescript
 ```json
 {
   "extends": "../../tsconfig.base.json",
-  "exclude": ["node_modules", "cdk.out"]
+  "include": ["bin", "src", "lib", "test"]
 }
 ```
 
 - You can also replace the `jest.config.js` with this improved version, that won't make trouble with
   compiled js files and adds the coverage and junit reporter. For the junit reporter you also need to install.
-  `jest-junit`.
+  `jest-junit` and `jest-sonar-reporter`.
 
 ```js
 const { defaults } = require('jest-config');
 
-/** @type {import('ts-jest/dist/types').InitialOptionsTsJest} */
+/**
+ * @type {import('ts-jest/dist/types').InitialOptionsTsJest}
+ */
 module.exports = {
   preset: 'ts-jest',
   testEnvironment: 'node',
@@ -192,6 +186,7 @@ module.exports = {
   restoreMocks: true,
   collectCoverage: true,
   reporters: ['default', 'jest-junit'],
+  testResultsProcessor: 'jest-sonar-reporter',
   // setupFiles: ['<rootDir>/jest.env.js'], // if you want to define env vars for the test
 };
 ```
