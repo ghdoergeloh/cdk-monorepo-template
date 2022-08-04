@@ -82,14 +82,14 @@ export class CiStack extends Stack {
       installCommands: ['npm set unsafe-perm true', 'export PATH=$PATH:$(pwd)/node_modules/.bin'],
       commands: [
         'pwd',
+        'export CODEARTIFACT_AUTH_TOKEN=`aws codeartifact get-authorization-token --domain ' +
+          props.npmRegistryDomain +
+          ' --query authorizationToken --output text`',
         'npm ci --prefer-offline',
         'npm run build',
         'npm run prettier:check',
         'npm run lint',
         'npm run test',
-        'export CODEARTIFACT_AUTH_TOKEN=`aws codeartifact get-authorization-token --domain ' +
-          props.npmRegistryDomain +
-          ' --query authorizationToken --output text`',
         'lerna publish from-package --no-private -y',
         'cd packages/' + pipelinePackageName,
         'cdk synth -q',
