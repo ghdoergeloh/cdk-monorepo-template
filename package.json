@@ -11,7 +11,7 @@
   "scripts": {
     "build": "lerna run build --stream",
     "precollect-reports": "npm run merge-coverage",
-    "collect-reports": "mkdir -p reports && ./merge-reports.sh packages/**/test-report.xml > reports/test-report.xml && cp coverage/lcov.info reports/lcov.info",
+    "collect-reports": "mkdir -p reports && ./merge-reports.ts && cp coverage/lcov.info reports/lcov.info",
     "increase-version": "lerna version --conventional-commits --no-changelog",
     "lint": "eslint .",
     "list": "lerna list --all --long",
