@@ -160,7 +160,7 @@ cdk init <lib|app> --language typescript
 
 ```json
 {
-  "extends": "../../tsconfig.base.json",
+  "extends": "../../tsconfig.json",
   "include": ["bin", "src", "lib", "test"]
 }
 ```

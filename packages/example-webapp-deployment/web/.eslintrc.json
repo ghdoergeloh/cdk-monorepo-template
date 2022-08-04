@@ -6,9 +6,6 @@
   },
   "plugins": ["react-hooks"],
   "extends": ["../../../.eslintrc.json", "plugin:react/recommended"],
-  "parserOptions": {
-    "project": ["./tsconfig.json"]
-  },
   "rules": {
     "react-hooks/rules-of-hooks": "error",
     "react-hooks/exhaustive-deps": "warn"

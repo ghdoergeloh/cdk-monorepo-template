@@ -1,4 +1,4 @@
 {
-  "extends": "../../tsconfig.base.json",
-  "exclude": ["node_modules", "cdk.out"]
+  "extends": "../../tsconfig.json",
+  "include": ["bin", "lambda", "lib", "test"]
 }

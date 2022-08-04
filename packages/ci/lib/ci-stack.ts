@@ -1,4 +1,4 @@
-import { Stack, StackProps } from 'aws-cdk-lib';
+import { Aws, Stack, StackProps } from 'aws-cdk-lib';
 import { Construct } from 'constructs';
 import { Repository } from 'aws-cdk-lib/aws-codecommit';
 import { CodeBuildStep, CodePipeline, CodePipelineSource, ManualApprovalStep } from 'aws-cdk-lib/pipelines';
@@ -12,7 +12,7 @@ import {
 } from 'aws-cdk-lib/aws-codebuild';
 import { ExampleStage } from 'app';
 import { Topic } from 'aws-cdk-lib/aws-sns';
-import { ServicePrincipal } from 'aws-cdk-lib/aws-iam';
+import { PolicyStatement, ServicePrincipal } from 'aws-cdk-lib/aws-iam';
 import { PipelineNotificationEvents } from 'aws-cdk-lib/aws-codepipeline';
 import { ISecret } from 'aws-cdk-lib/aws-secretsmanager';
 import path from 'path';
@@ -46,6 +46,8 @@ export class CiStack extends Stack {
       codeBuildCloneOutput: true,
     });
 
+    const codeartifactArn = 'arn:aws:codeartifact:' + Aws.REGION + ':' + Aws.ACCOUNT_ID + ':';
+
     const buildAndTestStep = new CodeBuildStep('BuildAndTestStep', {
       input: sourceCode,
       buildEnvironment: {
@@ -53,6 +55,30 @@ export class CiStack extends Stack {
         computeType: ComputeType.MEDIUM,
       },
       cache: Cache.local(LocalCacheMode.CUSTOM),
+      rolePolicyStatements: [
+        // see https://docs.aws.amazon.com/codeartifact/latest/ug/auth-and-access-control-iam-identity-based-access-control.html
+        new PolicyStatement({
+          actions: ['sts:GetServiceBearerToken'],
+          resources: ['*'],
+          conditions: {
+            StringEquals: {
+              'sts:AWSServiceName': 'codeartifact.amazonaws.com',
+            },
+          },
+        }),
+        new PolicyStatement({
+          resources: [
+            codeartifactArn + 'domain/' + props.npmRegistryDomain,
+            codeartifactArn + 'repository/' + props.npmRegistryDomain + '/*',
+            codeartifactArn + 'package/' + props.npmRegistryDomain + '/*',
+          ],
+          actions: [
+            'codeartifact:GetAuthorizationToken',
+            'codeartifact:ReadFromRepository',
+            'codeartifact:PublishPackageVersion',
+          ],
+        }),
+      ],
       installCommands: ['npm set unsafe-perm true', 'export PATH=$PATH:$(pwd)/node_modules/.bin'],
       commands: [
         'pwd',
@@ -64,7 +90,7 @@ export class CiStack extends Stack {
         'export CODEARTIFACT_AUTH_TOKEN=`aws codeartifact get-authorization-token --domain ' +
           props.npmRegistryDomain +
           ' --query authorizationToken --output text`',
-        'lerna publish from-git --no-private -y',
+        'lerna publish from-package --no-private -y',
         'cd packages/' + pipelinePackageName,
         'cdk synth -q',
       ],
