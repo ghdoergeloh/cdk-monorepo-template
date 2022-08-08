@@ -24,7 +24,7 @@
     "test": "CI=true lerna run --parallel test",
     "update-packagelock": "lerna exec -- rm -rf node_modules package-lock.json && rm -rf node_modules package-lock.json && npm install --no-audit",
     "update-packages": "ncu -i -x /@types/node$/ && lerna exec --concurrency 1 -- ncu -i -x /@types/node$/",
-    "watch": "lerna run --parallel watch"
+    "watch": "lerna run --parallel watch -- -- --preserveWatchOutput"
   },
   "devDependencies": {
     "@commitlint/cli": "^17.0.3",
