@@ -9,6 +9,7 @@ import {
   ComputeType,
   LinuxBuildImage,
   LocalCacheMode,
+  ReportGroup,
 } from 'aws-cdk-lib/aws-codebuild';
 import { ExampleStage } from 'app';
 import { Topic } from 'aws-cdk-lib/aws-sns';
@@ -47,6 +48,9 @@ export class CiStack extends Stack {
     });
 
     const codeartifactArn = 'arn:aws:codeartifact:' + Aws.REGION + ':' + Aws.ACCOUNT_ID + ':';
+
+    const testReports = new ReportGroup(this, 'TestReports');
+    const coverageReports = new ReportGroup(this, 'CoverageReports');
 
     const buildAndTestStep = new CodeBuildStep('BuildAndTestStep', {
       input: sourceCode,
@@ -105,11 +109,11 @@ export class CiStack extends Stack {
           },
         },
         reports: {
-          coverage: {
+          [coverageReports.reportGroupArn]: {
             'file-format': 'CLOVERXML',
             files: ['coverage/clover.xml'],
           },
-          tests: {
+          [testReports.reportGroupArn]: {
             'file-format': 'JUNITXML',
             files: ['**/junit.xml'],
           },
