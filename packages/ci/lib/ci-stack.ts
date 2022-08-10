@@ -189,6 +189,9 @@ export class CiStack extends Stack {
 
     pipeline.buildPipeline();
 
+    testReports.grantWrite(buildAndTestStep);
+    coverageReports.grantWrite(buildAndTestStep);
+
     const pipelineExecutionFailedTopic = new Topic(this, 'PipelineExecutionFailed', {
       masterKey: pipeline.pipeline.artifactBucket.encryptionKey, // just use the same key for this topic (cheaper)
     });
