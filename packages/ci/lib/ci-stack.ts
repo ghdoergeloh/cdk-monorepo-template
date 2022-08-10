@@ -14,7 +14,7 @@ import {
 } from 'aws-cdk-lib/aws-codebuild';
 import { ExampleStage } from 'app';
 import { Topic } from 'aws-cdk-lib/aws-sns';
-import { PolicyStatement, ServicePrincipal } from 'aws-cdk-lib/aws-iam';
+import { Grant, PolicyStatement, ServicePrincipal } from 'aws-cdk-lib/aws-iam';
 import { PipelineNotificationEvents } from 'aws-cdk-lib/aws-codepipeline';
 import { ISecret } from 'aws-cdk-lib/aws-secretsmanager';
 import path from 'path';
@@ -195,7 +195,13 @@ export class CiStack extends Stack {
     pipeline.buildPipeline();
 
     testReports.grantWrite(buildAndTestStep);
-    coverageReports.grantWrite(buildAndTestStep);
+    // coverageReports.grantWrite(buildAndTestStep);
+    // not working till https://github.com/aws/aws-cdk/issues/21534 is solved. Therefore ->
+    Grant.addToPrincipal({
+      grantee: buildAndTestStep,
+      actions: ['codebuild:CreateReport', 'codebuild:UpdateReport', 'codebuild:BatchPutCodeCoverages'],
+      resourceArns: [coverageReports.reportGroupArn],
+    });
 
     const pipelineExecutionFailedTopic = new Topic(this, 'PipelineExecutionFailed', {
       masterKey: pipeline.pipeline.artifactBucket.encryptionKey, // just use the same key for this topic (cheaper)
