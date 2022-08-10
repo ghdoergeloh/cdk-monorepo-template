@@ -50,10 +50,10 @@ export class CiStack extends Stack {
 
     const codeartifactArn = 'arn:aws:codeartifact:' + Aws.REGION + ':' + Aws.ACCOUNT_ID + ':';
 
-    const testReports = new ReportGroup(this, 'TestReports', {
+    const testReports = new ReportGroup(this, props.repositoryName + '/TestReports', {
       type: ReportGroupType.TEST,
     });
-    const coverageReports = new ReportGroup(this, 'CoverageReports', {
+    const coverageReports = new ReportGroup(this, props.repositoryName + '/CoverageReports', {
       type: ReportGroupType.CODE_COVERAGE,
     });
 
