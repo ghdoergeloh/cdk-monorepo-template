@@ -3,6 +3,8 @@
   "version": "0.0.0",
   "useWorkspaces": true,
   "ignoreChanges": [
+    "**/*.test.ts",
+    "**/*.spec.ts",
     "**/test/**",
     "**/*.md",
     "**/jest.config.js"
