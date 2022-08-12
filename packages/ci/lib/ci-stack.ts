@@ -157,13 +157,18 @@ export class CiStack extends Stack {
           },
         },
       },
+      cache: Cache.local(LocalCacheMode.CUSTOM),
       commands: [
-        'pwd',
         'echo $CLIENT_CERT_KEYSTORE | base64 -d > client-cert.p12',
         'export SONAR_SCANNER_OPTS="-Djavax.net.ssl.keyStore=$(pwd)/client-cert.p12 -Djavax.net.ssl.keyStorePassword=$CLIENT_CERT_KEYSTORE_PASSWORD"',
         'sonar-scanner -Dsonar.login=$SONAR_LOGIN -Dsonar.host.url=$SONAR_HOST_URL',
         'rm ./client-cert.p12',
       ],
+      partialBuildSpec: BuildSpec.fromObject({
+        cache: {
+          paths: ['/opt/sonar-scanner/.sonar/cache'],
+        },
+      }),
       primaryOutputDirectory: 'cdk.out',
     });
 
