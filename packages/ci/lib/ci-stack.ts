@@ -90,7 +90,6 @@ export class CiStack extends Stack {
       ],
       installCommands: ['npm set unsafe-perm true', 'export PATH=$PATH:$(pwd)/node_modules/.bin'],
       commands: [
-        'pwd',
         'export CODEARTIFACT_AUTH_TOKEN=`aws codeartifact get-authorization-token --domain ' +
           props.npmRegistryDomain +
           ' --query authorizationToken --output text`',
@@ -158,7 +157,6 @@ export class CiStack extends Stack {
         },
       },
       commands: [
-        'pwd',
         'echo $CLIENT_CERT_KEYSTORE | base64 -d > client-cert.p12',
         'export SONAR_SCANNER_OPTS="-Djavax.net.ssl.keyStore=$(pwd)/client-cert.p12 -Djavax.net.ssl.keyStorePassword=$CLIENT_CERT_KEYSTORE_PASSWORD"',
         'sonar-scanner -Dsonar.login=$SONAR_LOGIN -Dsonar.host.url=$SONAR_HOST_URL',
