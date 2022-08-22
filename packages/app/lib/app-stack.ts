@@ -1,5 +1,5 @@
 import { Stack, StackProps } from 'aws-cdk-lib';
-import { Construct } from 'constructs';
+import type { Construct } from 'constructs';
 import { Bucket } from 'aws-cdk-lib/aws-s3';
 import { ExampleWebappDeployment } from 'example-webapp-deployment';
 import { ExampleLambda } from 'example-lambda';

@@ -1,7 +1,7 @@
 import { Construct } from 'constructs';
 import { NodejsFunction } from 'aws-cdk-lib/aws-lambda-nodejs';
 import * as path from 'path';
-import { IBucket } from 'aws-cdk-lib/aws-s3';
+import type { IBucket } from 'aws-cdk-lib/aws-s3';
 
 export interface ExampleLambdaProps {
   bucket: IBucket;

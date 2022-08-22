@@ -1,7 +1,7 @@
 import { Construct } from 'constructs';
 import { BucketDeployment, Source } from 'aws-cdk-lib/aws-s3-deployment';
 import * as path from 'path';
-import { IBucket } from 'aws-cdk-lib/aws-s3';
+import type { IBucket } from 'aws-cdk-lib/aws-s3';
 
 export interface ExampleWebappDeploymentProps {
   websiteBucket: IBucket;

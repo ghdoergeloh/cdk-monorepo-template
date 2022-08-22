@@ -1,5 +1,5 @@
 import { handler } from './example';
-import { Context } from 'aws-lambda';
+import type { Context } from 'aws-lambda';
 
 describe('example', () => {
   it('should execute without error', async () => {

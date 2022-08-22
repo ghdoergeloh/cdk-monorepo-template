@@ -1,4 +1,4 @@
-import { CiConfig } from './ci';
+import type { CiConfig } from './ci';
 
 export const resConfig: CiConfig = {
   repositoryName: 'cdk-monorepo-template',
