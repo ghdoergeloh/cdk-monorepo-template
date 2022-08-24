@@ -24,7 +24,8 @@ export interface CiConfig {
    *
    * You can generate the string as follows: `base64 client-cert.p12 > client-cert.txt`
    *
-   * NOTE: Don't forget to set the project name and project specific settings in `sonar-project.properties`
+   * NOTE: Don't forget to set the project name and project specific settings in
+   * `sonar-project.properties`
    *
    * The complete json should look like this:
    *
