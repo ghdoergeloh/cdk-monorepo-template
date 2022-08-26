@@ -31,3 +31,4 @@ packages/**/build/**
 # Generated
 package-lock.json
 lerna.json
+CHANGELOG.md
