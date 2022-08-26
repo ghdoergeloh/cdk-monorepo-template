@@ -12,7 +12,7 @@
     "build": "lerna run build --stream",
     "precollect-reports": "npm run merge-coverage",
     "collect-reports": "mkdir -p reports && ./merge-reports.ts && cp coverage/lcov.info reports/lcov.info",
-    "increase-version": "lerna version --conventional-commits --no-changelog",
+    "increase-version": "lerna version --conventional-commits",
     "lint": "eslint .",
     "list": "lerna list --all --long",
     "premerge-coverage": "mkdir -p .nyc_output && lerna exec -- cp coverage/coverage-final.json \\$LERNA_ROOT_PATH/.nyc_output/coverage-\\$\\(echo \\$LERNA_PACKAGE_NAME \\| sed 's/[@/]/_/g' \\).json \\|\\| true",
