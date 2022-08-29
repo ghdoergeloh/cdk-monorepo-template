@@ -9,13 +9,64 @@
     "**/*.md",
     "**/jest.config.js"
   ],
-  "noChangelog": true,
+  "changelogPreset": {
+    "name": "conventional-changelog-conventionalcommits",
+    "commitUrlFormat": "{{host}}/{{owner}}/{{repository}}/commit/{{hash}}",
+    "compareUrlFormat": "{{host}}/{{owner}}/{{repository}}/compare/{{previousTag}}/.../{{currentTag}}",
+    "types": [
+      {
+        "type": "feat",
+        "section": "✨ Features"
+      },
+      {
+        "type": "fix",
+        "section": "\uD83D\uDC1B Bug Fixes"
+      },
+      {
+        "type": "perf",
+        "section": "\uD83D\uDE80 Performance Improvements"
+      },
+      {
+        "type": "revert",
+        "section": "\uD83D\uDDD1 Reverts"
+      },
+      {
+        "type": "docs",
+        "section": "\uD83D\uDCDD Documentation"
+      },
+      {
+        "type": "style",
+        "section": "\uD83D\uDC84 Styles"
+      },
+      {
+        "type": "refactor",
+        "section": "\uD83D\uDEE0 Code Refactoring"
+      },
+      {
+        "type": "test",
+        "section": "\uD83D\uDEA8 Tests"
+      },
+      {
+        "type": "build",
+        "section": "\uD83D\uDC77 Build System"
+      },
+      {
+        "type": "ci",
+        "section": "\uD83D\uDEC4 Continuous Integration"
+      },
+      {
+        "type": "chore",
+        "hidden": true
+      }
+    ]
+  },
   "command": {
     "version": {
       "allowBranch": [
         "master"
       ],
-      "message": "chore(release): publish %s"
+      "message": "chore(release): publish %s",
+      "conventionalCommits": true
     }
   }
 }

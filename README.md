@@ -106,7 +106,46 @@ npm run merge-coverage
 ```
 
 This will copy all `coverage-final.json` files into `./.nyc_output` and merge everything in the
-`/coverage/coverage-final.json` at root level.
+`/coverage/coverage-final.json` at root level and collect the result as well as a combined unit test result in the
+reports directory.
+
+### commit
+
+This template uses [conventional commits](https://www.conventionalcommits.org/) to resolve the next version bump and to
+generate the changelogs. When you run `npm install` it will install a git hook using husky to run a prettier check
+before each commit and to lint the commit message using `commitlint`. a conventional commit uses this pattern:
+
+```
+<type>[optional scope]: <description>
+
+[optional body]
+
+[optional footer(s)]
+```
+
+The type is one of these:
+
+| Commit Type | Title                    | Description                                                                                                 | Emoji |
+| ----------- | ------------------------ | ----------------------------------------------------------------------------------------------------------- | :---: |
+| `feat`      | Features                 | A new feature                                                                                               |  ✨   |
+| `fix`       | Bug Fixes                | A bug fix                                                                                                   |  🐛   |
+| `docs`      | Documentation            | Documentation only changes                                                                                  |  📚   |
+| `style`     | Styles                   | Changes that do not affect the meaning of the code (white-space, formatting, missing semi-colons, etc)      |  💎   |
+| `refactor`  | Code Refactoring         | A code change that neither fixes a bug nor adds a feature                                                   |  📦   |
+| `perf`      | Performance Improvements | A code change that improves performance                                                                     |  🚀   |
+| `test`      | Tests                    | Adding missing tests or correcting existing tests                                                           |  🚨   |
+| `build`     | Builds                   | Changes that affect the build system or external dependencies (example scopes: gulp, broccoli, npm)         |   🛠   |
+| `ci`        | Continuous Integrations  | Changes to our CI configuration files and scripts (example scopes: Travis, Circle, BrowserStack, SauceLabs) |  ⚙️   |
+| `chore`     | Chores                   | Other changes that don't modify src or test files                                                           |  ♻️   |
+| `revert`    | Reverts                  | Reverts a previous commit                                                                                   |   🗑   |
+
+If you have a breaking change, you need to add a `!` after the type or add `BREAKING CHANGE: <explanation>` as a footer.
+Some IDEs have plugins to support conventional commits and commitlint.
+
+IntelliJ:
+
+- [Conventional Commit](https://plugins.jetbrains.com/plugin/13389-conventional-commit)
+- [Commitlint Conventional Commit](https://plugins.jetbrains.com/plugin/14046-commitlint-conventional-commit)
 
 ### update
 

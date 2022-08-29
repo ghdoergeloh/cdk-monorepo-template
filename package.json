@@ -16,7 +16,7 @@
     "build": "lerna run build --stream",
     "precollect-reports": "npm run merge-coverage",
     "collect-reports": "mkdir -p reports && ./merge-reports.ts && cp coverage/lcov.info reports/lcov.info",
-    "increase-version": "lerna version --conventional-commits",
+    "increase-version": "lerna version",
     "lint": "eslint .",
     "list": "lerna list --all --long",
     "premerge-coverage": "mkdir -p .nyc_output && lerna exec -- cp coverage/coverage-final.json \\$LERNA_ROOT_PATH/.nyc_output/coverage-\\$\\(echo \\$LERNA_PACKAGE_NAME \\| sed 's/[@/]/_/g' \\).json \\|\\| true",
@@ -28,6 +28,7 @@
     "test": "CI=true lerna run --parallel test",
     "update-packagelock": "lerna exec -- rm -rf node_modules package-lock.json && rm -rf node_modules package-lock.json && npm install --no-audit",
     "update-packages": "ncu -i -x /@types/node$/ && lerna exec --concurrency 1 -- ncu -i -x /@types/node$/",
+    "version": "prettier -w **/CHANGELOG.md",
     "watch": "lerna run --parallel watch -- -- --preserveWatchOutput"
   },
   "devDependencies": {
