@@ -1,6 +1,12 @@
 {
   "name": "app",
   "version": "0.1.0",
+  "private": true,
+  "repository": {
+    "type": "git",
+    "url": "git.example.com",
+    "directory": "packages/app"
+  },
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
   "bin": {

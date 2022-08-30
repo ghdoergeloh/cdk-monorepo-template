@@ -2,6 +2,11 @@
   "name": "ci",
   "version": "0.1.0",
   "private": true,
+  "repository": {
+    "type": "git",
+    "url": "git.example.com",
+    "directory": "packages/ci"
+  },
   "bin": {
     "ci": "bin/ci.js"
   },

@@ -1,6 +1,11 @@
 {
   "name": "example-webapp-deployment",
   "version": "0.1.0",
+  "repository": {
+    "type": "git",
+    "url": "git.example.com",
+    "directory": "packages/example-webapp-deployment"
+  },
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
   "scripts": {

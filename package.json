@@ -3,6 +3,10 @@
   "version": "1.0.0",
   "private": true,
   "description": "a template for a monorepo structure that can be used for cdk projects",
+  "repository": {
+    "type": "git",
+    "url": "git.example.com"
+  },
   "license": "ISC",
   "author": "Georg Dörgeloh",
   "workspaces": [

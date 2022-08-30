@@ -2,6 +2,11 @@
   "name": "my-react-app",
   "version": "0.1.0",
   "private": true,
+  "repository": {
+    "type": "git",
+    "url": "git.example.com",
+    "directory": "packages/example-webapp-deployment/web"
+  },
   "scripts": {
     "build": "react-scripts build",
     "eject": "react-scripts eject",
