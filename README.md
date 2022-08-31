@@ -2,7 +2,11 @@
 
 ## Description
 
-This is a Template for a cdk based project. The idea is based on the descriptions in this
+...
+
+## Repository basics
+
+This repository is based on a Template for cdk. The idea is based on the descriptions in this
 [best practices guide from AWS](https://docs.aws.amazon.com/cdk/v2/guide/best-practices.html). As this guide says a cdk
 app is seperated into packages which each consists of one cdk app or cdk construct libraries which again are build out
 of other construct libraries.
@@ -25,7 +29,7 @@ Furthermore:
 - each **library-repo** should have at least one construct library package that will be published by the pipeline to an
   artifactory.
 
-## Working with this template
+## Working with this repository
 
 This project uses lerna to manage this multi-package-/mono-repository. If you need more information, have a look at
 [the Github documentation](https://github.com/lerna/lerna).
