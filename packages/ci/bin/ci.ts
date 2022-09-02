@@ -44,13 +44,18 @@ export interface CiConfig {
    */
   sonarscannerEcrName: string;
   /**
-   * Domain of the registry, where the non-private packages should be published. If you don't want
-   * to publish any package, leave this field undefined.
+   * Domain of the registry, where the non-private packages should be published, or dependencies can
+   * be pulled from.
    *
    * NOTE: Don't forget to configure the `.npmrc`. The environment variable CODEARTIFACT_AUTH_TOKEN
    * will be filled by the pipeline and can be referenced in the config file.
    */
   npmRegistryDomain?: string;
+  /**
+   * Set this to true if you want to publish the non-private packages in this repository. Requires
+   * `npmRegistryDomain` to be set.
+   */
+  publishPublicPackages?: boolean;
 }
 
 const app = new cdk.App();
@@ -69,6 +74,7 @@ new CiStack(app, 'CiStack', {
   sonarqubeSecret: sonarqubeSecret,
   sonarscannerRepo: sonarscannerRepo,
   npmRegistryDomain: resConfig.npmRegistryDomain,
+  publishPublicPackages: resConfig.publishPublicPackages,
   configs: {},
   env: {
     region: 'eu-west-1',

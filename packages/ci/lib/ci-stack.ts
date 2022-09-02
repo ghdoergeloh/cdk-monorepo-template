@@ -27,6 +27,7 @@ export interface CiStackProps extends StackProps {
   sonarqubeSecret: ISecret;
   sonarscannerRepo: ecr.IRepository;
   npmRegistryDomain?: string;
+  publishPublicPackages?: boolean;
   configs: {
     dev?: StackProps;
     int?: StackProps;
@@ -42,6 +43,9 @@ export class CiStack extends Stack {
     const pipelinePackageName = directories[directories.lastIndexOf('packages') + 1];
     assert(pipelinePackageName);
 
+    if (props.publishPublicPackages) {
+      assert(props.npmRegistryDomain, 'You need to add a registry domain if you want to publish your packages.');
+    }
     const repository = new Repository(this, 'Git', {
       repositoryName: props.repositoryName,
     });
@@ -102,15 +106,13 @@ export class CiStack extends Stack {
           ? 'export CODEARTIFACT_AUTH_TOKEN=`aws codeartifact get-authorization-token --domain ' +
             props.npmRegistryDomain +
             ' --query authorizationToken --output text`'
-          : '# No repository configured => no connection',
+          : 'echo "skip artifact login"',
         'npm ci --prefer-offline',
         'npm run build',
         'npm run prettier:check',
         'npm run lint',
         'npm run test',
-        props.npmRegistryDomain
-          ? 'lerna publish from-package --no-private -y'
-          : '# No repository configured => not publishing artifacts',
+        props.publishPublicPackages ? 'lerna publish from-package --no-private -y' : 'echo "skip artifact publishing"',
         'cd packages/' + pipelinePackageName,
         'cdk synth -q',
       ],
