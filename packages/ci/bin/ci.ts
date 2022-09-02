@@ -44,12 +44,13 @@ export interface CiConfig {
    */
   sonarscannerEcrName: string;
   /**
-   * Domain of the registry, where the non-private packages should be published.
+   * Domain of the registry, where the non-private packages should be published. If you don't want
+   * to publish any package, leave this field undefined.
    *
    * NOTE: Don't forget to configure the `.npmrc`. The environment variable CODEARTIFACT_AUTH_TOKEN
    * will be filled by the pipeline and can be referenced in the config file.
    */
-  npmRegistryDomain: string;
+  npmRegistryDomain?: string;
 }
 
 const app = new cdk.App();

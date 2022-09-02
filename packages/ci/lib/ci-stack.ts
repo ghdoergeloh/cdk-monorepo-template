@@ -26,7 +26,7 @@ export interface CiStackProps extends StackProps {
   branch: string;
   sonarqubeSecret: ISecret;
   sonarscannerRepo: ecr.IRepository;
-  npmRegistryDomain: string;
+  npmRegistryDomain?: string;
   configs: {
     dev?: StackProps;
     int?: StackProps;
@@ -59,24 +59,20 @@ export class CiStack extends Stack {
       type: ReportGroupType.CODE_COVERAGE,
     });
 
-    const buildAndTestStep = new CodeBuildStep('BuildAndTestStep', {
-      input: sourceCode,
-      buildEnvironment: {
-        buildImage: LinuxBuildImage.STANDARD_6_0,
-        computeType: ComputeType.MEDIUM,
-      },
-      cache: Cache.local(LocalCacheMode.CUSTOM),
-      rolePolicyStatements: [
-        // see https://docs.aws.amazon.com/codeartifact/latest/ug/auth-and-access-control-iam-identity-based-access-control.html
-        new PolicyStatement({
-          actions: ['sts:GetServiceBearerToken'],
-          resources: ['*'],
-          conditions: {
-            StringEquals: {
-              'sts:AWSServiceName': 'codeartifact.amazonaws.com',
-            },
+    const buildRolePolicyStatements: PolicyStatement[] = [
+      // see https://docs.aws.amazon.com/codeartifact/latest/ug/auth-and-access-control-iam-identity-based-access-control.html
+      new PolicyStatement({
+        actions: ['sts:GetServiceBearerToken'],
+        resources: ['*'],
+        conditions: {
+          StringEquals: {
+            'sts:AWSServiceName': 'codeartifact.amazonaws.com',
           },
-        }),
+        },
+      }),
+    ];
+    if (props.npmRegistryDomain) {
+      buildRolePolicyStatements.push(
         new PolicyStatement({
           resources: [
             codeartifactArn + 'domain/' + props.npmRegistryDomain,
@@ -88,19 +84,33 @@ export class CiStack extends Stack {
             'codeartifact:ReadFromRepository',
             'codeartifact:PublishPackageVersion',
           ],
-        }),
-      ],
+        })
+      );
+    }
+
+    const buildAndTestStep = new CodeBuildStep('BuildAndTestStep', {
+      input: sourceCode,
+      buildEnvironment: {
+        buildImage: LinuxBuildImage.STANDARD_6_0,
+        computeType: ComputeType.MEDIUM,
+      },
+      cache: Cache.local(LocalCacheMode.CUSTOM),
+      rolePolicyStatements: buildRolePolicyStatements,
       installCommands: ['npm set unsafe-perm true', 'export PATH=$PATH:$(pwd)/node_modules/.bin'],
       commands: [
-        'export CODEARTIFACT_AUTH_TOKEN=`aws codeartifact get-authorization-token --domain ' +
-          props.npmRegistryDomain +
-          ' --query authorizationToken --output text`',
+        props.npmRegistryDomain
+          ? 'export CODEARTIFACT_AUTH_TOKEN=`aws codeartifact get-authorization-token --domain ' +
+            props.npmRegistryDomain +
+            ' --query authorizationToken --output text`'
+          : '# No repository configured => no connection',
         'npm ci --prefer-offline',
         'npm run build',
         'npm run prettier:check',
         'npm run lint',
         'npm run test',
-        'lerna publish from-package --no-private -y',
+        props.npmRegistryDomain
+          ? 'lerna publish from-package --no-private -y'
+          : '# No repository configured => not publishing artifacts',
         'cd packages/' + pipelinePackageName,
         'cdk synth -q',
       ],
