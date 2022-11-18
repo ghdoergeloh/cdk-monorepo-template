@@ -10,7 +10,10 @@
   "extends": ["eslint:recommended", "prettier"],
   "rules": {
     "no-var": "error",
-    "prefer-const": "error"
+    "prefer-const": "error",
+    "no-useless-concat": "error",
+    "no-return-await": "error",
+    "no-undef-init": "error"
   },
   "overrides": [
     {
@@ -55,6 +58,16 @@
         "@typescript-eslint/no-duplicate-imports": ["error"],
         "@typescript-eslint/no-invalid-this": ["error"],
         "@typescript-eslint/no-loop-func": ["error"],
+        "@typescript-eslint/no-magic-numbers": [
+          "error",
+          {
+            "ignore": [-1, 0, 1],
+            "ignoreDefaultValues": true,
+            "ignoreEnums": true,
+            "ignoreNumericLiteralTypes": true,
+            "ignoreReadonlyClassProperties": true
+          }
+        ],
         "@typescript-eslint/no-redeclare": ["error"],
         "@typescript-eslint/no-require-imports": ["error"],
         "@typescript-eslint/no-shadow": ["error"],
