@@ -14,6 +14,8 @@ function isFileError(e: unknown): e is FileError {
   return !!e && typeof (e as Record<PropertyKey, unknown>)['code'] === 'string' && e instanceof Error;
 }
 
+const THIRD_LINE_INDEX = 2;
+
 async function mergeReports(dir: string, targetDir: string, reportFileName: string): Promise<void> {
   try {
     await fsPromise.mkdir(targetDir);
@@ -34,7 +36,7 @@ async function mergeReports(dir: string, targetDir: string, reportFileName: stri
           report
             .toString()
             .split('\n')
-            .slice(2, -1)
+            .slice(THIRD_LINE_INDEX, -1)
             .join('\n')
             .replaceAll(dir + path.sep, '') + '\n'
         );
