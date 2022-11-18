@@ -54,7 +54,7 @@ export class CiStack extends Stack {
       codeBuildCloneOutput: true,
     });
 
-    const codeartifactArn = 'arn:aws:codeartifact:' + Aws.REGION + ':' + Aws.ACCOUNT_ID + ':';
+    const codeartifactArn = `arn:aws:codeartifact:${Aws.REGION}:${Aws.ACCOUNT_ID}:`;
 
     const testReports = new ReportGroup(this, props.repositoryName + '/TestReports', {
       type: ReportGroupType.TEST,
@@ -79,9 +79,9 @@ export class CiStack extends Stack {
       buildRolePolicyStatements.push(
         new PolicyStatement({
           resources: [
-            codeartifactArn + 'domain/' + props.npmRegistryDomain,
-            codeartifactArn + 'repository/' + props.npmRegistryDomain + '/*',
-            codeartifactArn + 'package/' + props.npmRegistryDomain + '/*',
+            `${codeartifactArn}domain/${props.npmRegistryDomain}`,
+            `${codeartifactArn}repository/${props.npmRegistryDomain}/*`,
+            `${codeartifactArn}package/${props.npmRegistryDomain}/*`,
           ],
           actions: [
             'codeartifact:GetAuthorizationToken',
@@ -103,9 +103,7 @@ export class CiStack extends Stack {
       installCommands: ['npm set unsafe-perm true', 'export PATH=$PATH:$(pwd)/node_modules/.bin'],
       commands: [
         props.npmRegistryDomain
-          ? 'export CODEARTIFACT_AUTH_TOKEN=`aws codeartifact get-authorization-token --domain ' +
-            props.npmRegistryDomain +
-            ' --query authorizationToken --output text`'
+          ? `export CODEARTIFACT_AUTH_TOKEN=\`aws codeartifact get-authorization-token --domain ${props.npmRegistryDomain} --query authorizationToken --output text\``
           : 'echo "skip artifact login"',
         'npm ci --prefer-offline',
         'npm run build',
@@ -116,7 +114,7 @@ export class CiStack extends Stack {
         'cd packages/' + pipelinePackageName,
         'cdk synth -q',
       ],
-      primaryOutputDirectory: 'packages/' + pipelinePackageName + '/cdk.out',
+      primaryOutputDirectory: `packages/${pipelinePackageName}/cdk.out`,
       partialBuildSpec: BuildSpec.fromObject({
         phases: {
           install: {
