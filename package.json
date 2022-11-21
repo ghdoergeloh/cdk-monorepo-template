@@ -29,7 +29,7 @@
     "update-packagelock": "lerna exec -- rm -rf node_modules package-lock.json && rm -rf node_modules package-lock.json && npm install --no-audit",
     "update-packages": "ncu -i -x /@types/node$/ --root -ws",
     "version": "prettier -w **/CHANGELOG.md",
-    "watch": "lerna run --parallel watch -- --preserveWatchOutput"
+    "watch": "lerna run --stream --parallel watch -- --preserveWatchOutput"
   },
   "devDependencies": {
     "@commitlint/cli": "^17.1.2",
