@@ -24,8 +24,10 @@ reports
 
 # Builds
 packages/**/*.js
+packages/**/*.mjs
 !packages/**/jest.*.js
 packages/**/*.d.ts
+packages/**/*.d.mts
 packages/**/build/**
 
 # Generated

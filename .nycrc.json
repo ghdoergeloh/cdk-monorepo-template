@@ -1,0 +1,6 @@
+{
+  "all": true,
+  "reporter": ["clover", "lcovonly", "text"],
+  "extension": [".ts", ".mts", ".cts", ".tsx"],
+  "exclude": ["**/*.spec.*", "**/*.test.*", "**/test/*"]
+}

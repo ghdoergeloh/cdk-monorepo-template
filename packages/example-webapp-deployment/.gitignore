@@ -1,7 +1,7 @@
-lib/**/*.js
-lib/**/*.d.ts
-test/**/*.js
-test/**/*.d.ts
+*.js
+*.mjs
+*.d.ts
+*.d.mts
 node_modules
 
 # CDK asset staging directory
