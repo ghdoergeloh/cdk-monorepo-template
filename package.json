@@ -24,7 +24,7 @@
     "prepare": "husky install",
     "prettier:check": "prettier --check .",
     "prettier:write": "prettier --write .",
-    "test": "CI=true lerna run --parallel --concurrency 3 test",
+    "test": "CI=true lerna run test",
     "update-packagelock": "lerna exec -- rm -rf node_modules package-lock.json && rm -rf node_modules package-lock.json && npm install --no-audit",
     "update-packages": "ncu -i -x /@types/node$/ --root -ws",
     "version": "prettier -w **/CHANGELOG.md",
