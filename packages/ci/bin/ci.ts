@@ -9,6 +9,10 @@ import * as ecr from 'aws-cdk-lib/aws-ecr';
 
 export interface CiConfig {
   /**
+   * The name of the application. This will prefix the stacks e.g. ApplicationName-Dev-StackName.
+   */
+  applicationName: string;
+  /**
    * The name of the repository that will be generated and where the code will be stored.
    */
   repositoryName: string;
@@ -70,6 +74,7 @@ const sonarscannerRepo = ecr.Repository.fromRepositoryName(
 
 new CiStack(app, 'CiStack', {
   branch: resConfig.branch,
+  applicationName: resConfig.applicationName,
   repositoryName: resConfig.repositoryName,
   sonarqubeSecret: sonarqubeSecret,
   sonarscannerRepo: sonarscannerRepo,

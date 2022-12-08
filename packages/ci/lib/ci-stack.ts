@@ -22,6 +22,7 @@ import type * as ecr from 'aws-cdk-lib/aws-ecr';
 import assert from 'assert';
 
 export interface CiStackProps extends StackProps {
+  applicationName: string;
   repositoryName: string;
   branch: string;
   sonarqubeSecret: ISecret;
@@ -185,19 +186,19 @@ export class CiStack extends Stack {
 
     // DEV STAGE
     if (props.configs.dev) {
-      pipeline.addStage(new ExampleStage(this, 'Dev', props.configs.dev), {});
+      pipeline.addStage(new ExampleStage(this, props.applicationName + 'Dev', props.configs.dev), {});
     }
 
     // INT STAGE
     if (props.configs.int) {
-      pipeline.addStage(new ExampleStage(this, 'Int', props.configs.int), {
+      pipeline.addStage(new ExampleStage(this, props.applicationName + 'Int', props.configs.int), {
         pre: [new ManualApprovalStep('ApproveInt')],
       });
     }
 
     // PROD STAGE
     if (props.configs.prod) {
-      pipeline.addStage(new ExampleStage(this, 'Prod', props.configs.prod), {
+      pipeline.addStage(new ExampleStage(this, props.applicationName + 'Prod', props.configs.prod), {
         pre: [new ManualApprovalStep('ApproveProd')],
       });
     }
