@@ -72,7 +72,7 @@ const sonarscannerRepo = ecr.Repository.fromRepositoryName(
   resConfig.sonarscannerEcrName
 );
 
-new CiStack(app, 'CiStack', {
+new CiStack(app, resConfig.applicationName + 'Ci', {
   branch: resConfig.branch,
   applicationName: resConfig.applicationName,
   repositoryName: resConfig.repositoryName,
