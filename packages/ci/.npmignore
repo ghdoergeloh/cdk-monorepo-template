@@ -5,8 +5,6 @@
 .cdk.staging
 cdk.out
 
-jest.config.js
-jest.env.js
 junit.xml
 test-report.xml
 tsconfig.json
