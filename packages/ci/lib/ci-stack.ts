@@ -148,7 +148,7 @@ export class CiStack extends Stack {
         'cdk.out': buildAndTestStep,
       },
       buildEnvironment: {
-        buildImage: LinuxBuildImage.fromEcrRepository(props.sonarscannerRepo, '4.7'),
+        buildImage: LinuxBuildImage.fromEcrRepository(props.sonarscannerRepo),
         computeType: ComputeType.MEDIUM,
         environmentVariables: {
           SONAR_LOGIN: {
