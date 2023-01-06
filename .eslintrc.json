@@ -17,8 +17,8 @@
   },
   "overrides": [
     {
-      "files": ["**/*.ts", "**/*.tsx"],
-      "excludedFiles": ["**/*.d.ts"],
+      "files": ["**/*.ts", "**/*.tsx", "**/*.mts", "**/*.cts"],
+      "excludedFiles": ["**/*.d.ts", "**/*.d.tsx", "**/*.d.mts", "**/*.d.cts"],
       "parser": "@typescript-eslint/parser",
       "parserOptions": {
         "project": ["./tsconfig.json"] // needs to be set in the package's eslintrc if tsconfig.json differs
