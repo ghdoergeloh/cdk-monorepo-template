@@ -98,6 +98,12 @@ export class CiStack extends Stack {
       buildEnvironment: {
         buildImage: LinuxBuildImage.STANDARD_6_0,
         computeType: ComputeType.MEDIUM,
+        environmentVariables: {
+          CI: {
+            type: BuildEnvironmentVariableType.PLAINTEXT,
+            value: 'true',
+          },
+        },
       },
       cache: Cache.local(LocalCacheMode.CUSTOM),
       rolePolicyStatements: buildRolePolicyStatements,

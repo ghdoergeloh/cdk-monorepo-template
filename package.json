@@ -13,7 +13,7 @@
     "packages/**"
   ],
   "scripts": {
-    "build": "lerna run build --stream",
+    "build": "lerna run build",
     "precollect-reports": "npm run merge-coverage",
     "collect-reports": "mkdir -p reports && ./merge-reports.ts && cp coverage/lcov.info reports/lcov.info",
     "increase-version": "lerna version",
@@ -24,7 +24,7 @@
     "prepare": "husky install",
     "prettier:check": "prettier --check .",
     "prettier:write": "prettier --write .",
-    "test": "CI=true lerna run test",
+    "test": "lerna run test --concurrency 3",
     "update-packagelock": "lerna exec -- rm -rf node_modules package-lock.json && rm -rf node_modules package-lock.json && npm install --no-audit",
     "update-packages": "ncu -i -x /@types/node$/ --root -ws",
     "version": "prettier -w **/CHANGELOG.md",
