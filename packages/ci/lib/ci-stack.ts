@@ -142,7 +142,7 @@ export class CiStack extends Stack {
           },
         },
         cache: {
-          paths: ['/root/.npm'],
+          paths: ['/root/.npm/**/*'],
         },
       }),
     });
