@@ -109,9 +109,6 @@ export class CiStack extends Stack {
       rolePolicyStatements: buildRolePolicyStatements,
       installCommands: ['npm set unsafe-perm true', 'export PATH=$PATH:$(pwd)/node_modules/.bin'],
       commands: [
-        props.npmRegistryDomain
-          ? `export CODEARTIFACT_AUTH_TOKEN=\`aws codeartifact get-authorization-token --domain ${props.npmRegistryDomain} --query authorizationToken --output text\``
-          : 'echo "skip artifact login"',
         'npm ci --prefer-offline',
         'npm run build',
         'npm run prettier:check',
@@ -126,6 +123,16 @@ export class CiStack extends Stack {
         phases: {
           install: {
             'runtime-versions': { nodejs: '16' },
+          },
+          pre_build: {
+            commands: [
+              ...(props.npmRegistryDomain
+                ? [
+                    `cp packages/${pipelinePackageName}/resources/ci.npmrc ~/.npmrc`,
+                    `export CODEARTIFACT_AUTH_TOKEN=\`aws codeartifact get-authorization-token --domain ${props.npmRegistryDomain} --query authorizationToken --output text\``,
+                  ]
+                : []),
+            ],
           },
           build: {
             finally: ['cd $CODEBUILD_SRC_DIR', 'npm run collect-reports'],
