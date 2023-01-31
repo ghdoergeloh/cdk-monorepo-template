@@ -21,13 +21,5 @@
     "noUnusedParameters": true,
     "importsNotUsedAsValues": "error"
   },
-  "include": [
-    "packages/*/bin",
-    "packages/*/src",
-    "packages/*/lib",
-    "packages/*/test",
-    "packages/*/lambda",
-    "packages/*/web"
-  ],
-  "exclude": ["**/build", "**/node_modules"]
+  "exclude": ["**/build", "**/node_modules", "**/coverage", "**/cdk.out"]
 }
