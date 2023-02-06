@@ -16,7 +16,7 @@ const config: Config = {
   collectCoverage: true,
   reporters: ['default', 'jest-junit'],
   testResultsProcessor: 'jest-sonar-reporter',
-  // setupFiles: ['<rootDir>/jest.env.ts'], // if you want to define env vars for the test
+  // setupFiles: ['<rootDir>/jest.env.mts'], // if you want to define env vars for the test
   transform: {
     '^.+\\.tsx?$': ['ts-jest', { useESM: false }],
     '^.+\\.mtsx?$': ['ts-jest', { useESM: true }],
