@@ -1,12 +1,12 @@
 *.ts
 !*.d.ts
+*.mts
+!*.d.mts
 
 # CDK asset staging directory
 .cdk.staging
 cdk.out
 
-jest.config.ts
-jest.env.ts
 junit.xml
 test-report.xml
 tsconfig.json
